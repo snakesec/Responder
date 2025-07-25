@@ -1,18 +1,23 @@
 rm -rf /opt/ANDRAX/responder
 
-apt update
-apt install -y python3-netifaces
+python3 -m venv /opt/ANDRAX/responder
+
+source /opt/ANDRAX/responder/bin/activate
+
+/opt/ANDRAX/responder/bin/pip3 install wheel
+
+/opt/ANDRAX/responder/bin/pip3 install -r requirements.txt
 
 if [ $? -eq 0 ]
 then
   # Result is OK! Just continue...
-  echo "APT install python3-netifaces... PASS!"
+  echo "Pip install requirements... PASS!"
 else
   # houston we have a problem
   exit 1
 fi
 
-cp -Rf $(pwd) /opt/ANDRAX/responder
+cp -Rf $(pwd) /opt/ANDRAX/responder/package
 
 if [ $? -eq 0 ]
 then
